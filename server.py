@@ -1,5 +1,6 @@
 import grpc
 import logging
+from datetime import timedelta, date
 from concurrent import futures
 
 import db
@@ -24,7 +25,8 @@ class MyLoanService(pb2_grpc.QuikLoanerServicer):
         logging.info('interest per term: ' + str(interest))
         logging.info('term amount: '+ str(term_amount))
         for i in range(request.repayment_terms):
-            item = repayment.Repayment(i + 1, term_amount, interest, request.loan_amount, 'today', 'not-paid', request.email, loan_no)
+            _date = date.today() + timedelta(days=i)
+            item = repayment.Repayment(i + 1, term_amount, interest, request.loan_amount, _date.strftime("%b %d %Y"), 'not-paid', request.email, loan_no)
             self.loans.append(item)
         db.saveRepayments(self.loans)
         logging.info('total active repayments: ' + str(len(self.loans)))
