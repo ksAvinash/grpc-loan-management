@@ -39,7 +39,7 @@ if __name__ == '__main__':
   while True:
     logging.info('choose the action to perform')
     logging.info('1. New Loan')
-    logging.info('2. Show Installments')
+    logging.info('2. Show Repayments')
     logging.info('3. Make RePayment')
     choice = input()
 
