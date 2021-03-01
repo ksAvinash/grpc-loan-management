@@ -11,7 +11,7 @@ class Repayment:
       self.email = email
       self.loan_no = loan_no
 
-def get_installment_item(loan):
+def get_repayment_item(loan):
   item = pb2.repaymentItem()
   item.term = loan.term
   item.principal = loan.principal

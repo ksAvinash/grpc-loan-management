@@ -37,7 +37,7 @@ class MyLoanService(pb2_grpc.QuikLoanerServicer):
         resp = pb2.showRepaymentResponse()
         for loan in self.loans:
             if loan.email == request.email:
-                item = repayment.get_installment_item(loan)
+                item = repayment.get_repayment_item(loan)
                 resp.items.append(item)
         logging.info('found user repayments: ' + str(len(resp.items)))
         return resp
