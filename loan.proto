@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+message createLoanRequest {
+  string email = 1;
+  float interest_rate = 2;
+  int32 repayment_terms = 3;
+  int32 loan_amount = 4;
+}
+
+message createLoanResponse {
+  bool success = 1;
+}
+
+message showRepaymentRequest {
+  string email = 1;
+}
+
+message repaymentItem {
+  int32 term = 1;
+  int32 principal = 2;
+  float interest = 3;
+  int32 total = 4;
+  string date = 5;
+  string status = 6;
+  string email = 7;
+  string loan_no = 8;
+}
+
+message showRepaymentResponse {
+  repeated repaymentItem items = 1;
+}
+
+message makeRepaymentRequest {
+  string email = 1;
+  int32 term = 2;
+  int32 amount = 3;
+}
+
+message makeRepaymentResponse {
+  bool success = 1;
+}
+
+service QuikLoaner {
+  rpc save_loan(createLoanRequest) returns (createLoanResponse) {}
+
+  rpc show_repayments(showRepaymentRequest) returns (showRepaymentResponse) {}
+
+  rpc make_repayment(makeRepaymentRequest) returns (makeRepaymentResponse) {}
+}
